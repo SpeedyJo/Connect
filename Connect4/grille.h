@@ -3,7 +3,6 @@
 
 const int HAUTEUR = 6;
 const int LONGUEUR = 7;
-const char VIDE = '-';
 
 class Grille
 {
@@ -15,6 +14,11 @@ public:
 	bool ajouter(char joueur, int rangee);
 	bool verifierGagnant() const;
 	void reinitialiser();
+	void afficher();
+
+	const int HAUT = HAUTEUR;
+	const int LONG = LONGUEUR;
+	const char VIDE = '-';
 
 	//~Grille();
 };

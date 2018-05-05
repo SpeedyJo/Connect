@@ -32,8 +32,9 @@ bool Grille::ajouter(char joueur, int rangee)
 
 bool Grille::verifierGagnant() const
 {
-	int dx[N] = {0, 1, 1, 1, 0,-1,-1,-1};
-    	int dy[N] = {1, 1, 0,-1,-1,-1, 0, 1};
+	//int dx[N] = {0, 1, 1, 1, 0,-1,-1,-1};
+    //int dy[N] = {1, 1, 0,-1,-1,-1, 0, 1};
+	return false;
 }
 
 void Grille::reinitialiser()
