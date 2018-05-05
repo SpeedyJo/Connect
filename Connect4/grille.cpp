@@ -58,7 +58,8 @@ bool Grille::verifierGagnant(char joueur) const
 		do{
 			colonne = (x + i*dx[k]);
 			rangee = (y + i*dy[k]);
-			if (0 <= colonne && colonne <= LONGUEUR && 0 <= rangee && rangee <= HAUTEUR)
+			memeChar = false;
+			if (0 <= colonne && colonne < LONGUEUR && 0 <= rangee && rangee < HAUTEUR)
 			{
 				if (grille[colonne][rangee] == joueur)
 				{
@@ -79,7 +80,8 @@ bool Grille::verifierGagnant(char joueur) const
 		do{
 			colonne = (x + i*dx[k]);
 			rangee = (y + i*dy[k]);
-			if (0 <= colonne && colonne <= LONGUEUR && 0 <= rangee && rangee <= HAUTEUR)
+			memeChar = false;
+			if (0 <= colonne && colonne < LONGUEUR && 0 <= rangee && rangee < HAUTEUR)
 			{
 				if (grille[colonne][rangee] == joueur)
 				{
@@ -117,4 +119,17 @@ void Grille::afficher()
 			std::cout << "  " << grille[i][j] << "  ";
 		std::cout << std::endl;
 	}
+}
+bool Grille::verifierGrillePleine()
+{
+	auto colonnePleine = [](int colonne, char VIDE)
+	{
+		return grille[HAUTEUR-1][colonne] != VIDE;
+	};
+	for (int i = 0; i < LONG; i++)
+	{
+		if (!colonnePleine(i, VIDE))
+			return false;
+	}
+	return true;
 }

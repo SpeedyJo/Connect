@@ -15,6 +15,7 @@ public:
 	bool ajouter(char joueur, int rangee);
 	bool verifierColonnePleine(int colonne);
 	bool verifierGagnant(char joueur) const;
+	bool verifierGrillePleine();
 	void reinitialiser();
 	void afficher();
 

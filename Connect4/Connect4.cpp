@@ -5,8 +5,9 @@
 #include <string>
 
 Grille& grille = Grille::instance();
-char joueur1 = 'O';
-char joueur2 = 'X';
+
+const int NBR_JOUEUR = 2;
+char joueurs[NBR_JOUEUR] = { 'O', 'X' };
 
 void tourJoueur(char joueur)
 {
@@ -37,20 +38,24 @@ void tourJoueur(char joueur)
 
 void deroulementPartie()
 {
-	char joueurGagnant = '-';
-	while (joueurGagnant == '-')
+	char joueurGagnant = grille.VIDE;
+	while (joueurGagnant == grille.VIDE)
 	{
-		tourJoueur(joueur1);
-		grille.afficher();
-		if (grille.verifierGagnant(joueur1))
+		for (int i = 0; i < NBR_JOUEUR; i++)
 		{
-			joueurGagnant = joueur1;
-			break;
+			tourJoueur(joueurs[i]);
+			grille.afficher();
+			if (grille.verifierGagnant(joueurs[i]))
+			{
+				joueurGagnant = joueurs[i];
+				break;
+			}
+			else if (grille.verifierGrillePleine())
+			{
+				std::cout << "Partie nulle" << std::endl;
+				return;
+			}
 		}
-		tourJoueur(joueur2);
-		grille.afficher();
-		if (grille.verifierGagnant(joueur2))
-			joueurGagnant = joueur2;
 	}
 	std::cout << "Le joueur " << joueurGagnant << " a gagne!!" << std::endl;
 }
