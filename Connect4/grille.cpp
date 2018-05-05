@@ -1,4 +1,5 @@
 #include "grille.h"
+#include <iostream>
 
 namespace
 {
@@ -20,21 +21,73 @@ bool Grille::ajouter(char joueur, int rangee)
 {
 	int i = 0;
 	bool trouvePos = false;
-	do
+	while(i < HAUTEUR && !trouvePos)
 	{
 		trouvePos = grille[i][rangee] == VIDE;
 		if (trouvePos)
+		{
+			positionCourante = std::make_tuple(i, rangee);
 			grille[i][rangee] = joueur;
+		}
 		i++;
-	} while (i < HAUTEUR || trouvePos);
+	}
 	return trouvePos;
 }
 
-bool Grille::verifierGagnant() const
+bool Grille::verifierGagnant(char joueur) const
 {
-	//int dx[N] = {0, 1, 1, 1, 0,-1,-1,-1};
-    //int dy[N] = {1, 1, 0,-1,-1,-1, 0, 1};
-	return false;
+	int x = std::get<0>(positionCourante);
+	int y = std::get<1>(positionCourante);
+	const int DIRECTION = 4;
+	const int connectN = 3;
+	int dx[DIRECTION] = {0, 1, 1, 1};
+    int dy[DIRECTION] = {1, 1, 0,-1};
+	int colonne;
+	int rangee;
+	bool gagnant = false;
+	for(int k = 0; k < DIRECTION; k++)
+	{
+		bool memeChar= false;
+		int i = 1;
+		int nbrMemeChar = 0;
+		do{
+			colonne = (x + i*dx[k]);
+			rangee = (y + i*dy[k]);
+			if(grille[colonne][rangee] == joueur)
+			{
+				memeChar = true;
+				nbrMemeChar++;
+			}
+			else if (grille[colonne][rangee] != joueur)
+				memeChar = false;
+			
+			if (nbrMemeChar >= connectN){
+				gagnant =true;
+				break;
+			}
+			i++;
+		}while(memeChar);
+		i =-1;
+		do{
+			colonne = (x + i*dx[k]);
+			rangee = (y + i*dy[k]);
+			if(grille[colonne][rangee] = joueur)
+			{
+				memeChar = true;
+				nbrMemeChar++;
+			}
+			else if (grille[colonne][rangee] = joueur)
+				memeChar = false;
+			
+			if (nbrMemeChar >= connectN){
+				gagnant =true;
+				break;
+			}
+			i--;
+		}while(memeChar && !gagnant);
+		
+	}
+	return gagnant;
 }
 
 void Grille::reinitialiser()
@@ -42,4 +95,15 @@ void Grille::reinitialiser()
 	for (int i = 0; i < LONGUEUR; i++)
 		for (int j = 0; j < HAUTEUR; j++)
 			grille[i][j] = VIDE;
+}
+
+void Grille::afficher()
+{
+	for (int i = 0; i < HAUTEUR; i++)
+	{
+		std::cout << "\t";
+		for (int j = 0; j < LONGUEUR; j++)
+			std::cout << "  " << grille[i][j] << "  ";
+		std::cout << std::endl;
+	}
 }
