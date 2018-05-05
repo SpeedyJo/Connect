@@ -30,10 +30,54 @@ bool Grille::ajouter(char joueur, int rangee)
 	return trouvePos;
 }
 
-bool Grille::verifierGagnant() const
+bool Grille::verifierGagnant(char joueur) const
 {
-	int dx[N] = {0, 1, 1, 1, 0,-1,-1,-1};
-    	int dy[N] = {1, 1, 0,-1,-1,-1, 0, 1};
+	int dx[N] = {0, 1, 1, 1};
+    	int dy[N] = {1, 1, 0,-1};
+	bool gagnant = false;
+	for(int k = 0; k < dx.size(); k++)
+	{
+		bool memeChar= false;
+		int i =0;
+		int nbrMemeChar = 0;
+		do{
+			colonne = (x + i*dx[k]);
+			rangee = (y + i*dy[k]);
+			if(grille[colonne][rangee] = joueur)
+			{
+				memeChar = true;
+				nbrMemeChar++;
+			}
+			else if (grille[colonne][rangee] = joueur)
+				memeChar = false;
+			
+			if (nbrMemeChar >= 4){
+				gagnant =true;
+				break;
+			}
+			i++;
+		}while(memeChar);
+		int i =-1;
+		do{
+			colonne = (x + i*dx[k]);
+			rangee = (y + i*dy[k]);
+			if(grille[colonne][rangee] = joueur)
+			{
+				memeChar = true;
+				nbrMemeChar++;
+			}
+			else if (grille[colonne][rangee] = joueur)
+				memeChar = false;
+			
+			if (nbrMemeChar >= 4){
+				gagnant =true;
+				break;
+			}
+			i--;
+		}while(memeChar);
+		
+	}
+	return gagnant;
 }
 
 void Grille::reinitialiser()
