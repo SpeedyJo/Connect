@@ -10,20 +10,20 @@ char joueur2 = 'X';
 
 void tourJoueur(char joueur)
 {
-	int rangee = -1;
-	while (rangee == -1)
+	int colonne = -1;
+	while (colonne == -1)
 	{
 		std::cout << "Placez votre pion sur une rangee (entrez chiffre de 1 a " << grille.LONG << ")." << std::endl;
 		//std::cin.ignore();
-		std::cin >> rangee;
-		//std::getline(std::cin, rangee);
-		if (rangee < 1 || rangee > grille.LONG)
+		std::cin >> colonne;
+		//std::getline(std::cin, colonne);
+		if (colonne < 1 || colonne > grille.LONG)
 		{
 			std::cout << "Erreur" << std::endl;
-			rangee = -1;
+			colonne = -1;
 		}
 	}
-	grille.ajouter(joueur, rangee - 1);
+	grille.ajouter(joueur, colonne - 1);
 }
 
 void deroulementPartie()

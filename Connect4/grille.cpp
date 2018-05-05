@@ -17,17 +17,17 @@ Grille& Grille::instance()
 	static Grille grille = Grille();
 	return grille;
 }
-bool Grille::ajouter(char joueur, int rangee)
+bool Grille::ajouter(char joueur, int colonne)
 {
 	int i = 0;
 	bool trouvePos = false;
 	while(i < HAUTEUR && !trouvePos)
 	{
-		trouvePos = grille[i][rangee] == VIDE;
+		trouvePos = grille[i][colonne] == VIDE;
 		if (trouvePos)
 		{
-			positionCourante = std::make_tuple(i, rangee);
-			grille[i][rangee] = joueur;
+			positionCourante = std::make_tuple(i, colonne);
+			grille[i][colonne] = joueur;
 		}
 		i++;
 	}
@@ -92,8 +92,8 @@ bool Grille::verifierGagnant(char joueur) const
 
 void Grille::reinitialiser()
 {
-	for (int i = 0; i < LONGUEUR; i++)
-		for (int j = 0; j < HAUTEUR; j++)
+	for (int i = 0; i < HAUTEUR; i++)
+		for (int j = 0; j < LONGUEUR; j++)
 			grille[i][j] = VIDE;
 }
 
