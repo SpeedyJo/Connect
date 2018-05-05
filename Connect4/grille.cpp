@@ -34,6 +34,11 @@ bool Grille::ajouter(char joueur, int colonne)
 	return trouvePos;
 }
 
+bool Grille::verifierColonnePleine(int colonne)
+{
+	return grille[HAUTEUR-1][colonne] != VIDE;
+}
+
 bool Grille::verifierGagnant(char joueur) const
 {
 	int x = std::get<0>(positionCourante);
@@ -53,37 +58,43 @@ bool Grille::verifierGagnant(char joueur) const
 		do{
 			colonne = (x + i*dx[k]);
 			rangee = (y + i*dy[k]);
-			if(grille[colonne][rangee] == joueur)
+			if (0 <= colonne && colonne <= LONGUEUR && 0 <= rangee && rangee <= HAUTEUR)
 			{
-				memeChar = true;
-				nbrMemeChar++;
+				if (grille[colonne][rangee] == joueur)
+				{
+					memeChar = true;
+					nbrMemeChar++;
+				}
+				else if (grille[colonne][rangee] != joueur)
+					memeChar = false;
+
+				if (nbrMemeChar >= connectN) {
+					gagnant = true;
+					break;
+				}
+				i++;
 			}
-			else if (grille[colonne][rangee] != joueur)
-				memeChar = false;
-			
-			if (nbrMemeChar >= connectN){
-				gagnant =true;
-				break;
-			}
-			i++;
 		}while(memeChar);
 		i =-1;
 		do{
 			colonne = (x + i*dx[k]);
 			rangee = (y + i*dy[k]);
-			if(grille[colonne][rangee] = joueur)
+			if (0 <= colonne && colonne <= LONGUEUR && 0 <= rangee && rangee <= HAUTEUR)
 			{
-				memeChar = true;
-				nbrMemeChar++;
+				if (grille[colonne][rangee] == joueur)
+				{
+					memeChar = true;
+					nbrMemeChar++;
+				}
+				else if (grille[colonne][rangee] != joueur)
+					memeChar = false;
+
+				if (nbrMemeChar >= connectN) {
+					gagnant = true;
+					break;
+				}
+				i--;
 			}
-			else if (grille[colonne][rangee] = joueur)
-				memeChar = false;
-			
-			if (nbrMemeChar >= connectN){
-				gagnant =true;
-				break;
-			}
-			i--;
 		}while(memeChar && !gagnant);
 		
 	}
@@ -99,7 +110,7 @@ void Grille::reinitialiser()
 
 void Grille::afficher()
 {
-	for (int i = 0; i < HAUTEUR; i++)
+	for (int i = HAUTEUR-1; i >= 0; i--)
 	{
 		std::cout << "\t";
 		for (int j = 0; j < LONGUEUR; j++)

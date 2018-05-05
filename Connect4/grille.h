@@ -13,6 +13,7 @@ private:
 public:
 	static Grille& instance();
 	bool ajouter(char joueur, int rangee);
+	bool verifierColonnePleine(int colonne);
 	bool verifierGagnant(char joueur) const;
 	void reinitialiser();
 	void afficher();
