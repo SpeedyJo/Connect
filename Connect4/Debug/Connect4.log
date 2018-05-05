@@ -1,0 +1,8 @@
+﻿  grille.cpp
+c:\users\antoine\desktop\concordia\comp371\assignments\assignment 3\connect4\grille.cpp(35): error C2065: 'N': undeclared identifier
+c:\users\antoine\desktop\concordia\comp371\assignments\assignment 3\connect4\grille.cpp(35): error C2078: too many initializers
+c:\users\antoine\desktop\concordia\comp371\assignments\assignment 3\connect4\grille.cpp(36): error C2065: 'N': undeclared identifier
+c:\users\antoine\desktop\concordia\comp371\assignments\assignment 3\connect4\grille.cpp(36): error C2078: too many initializers
+  Connect4.cpp
+c:\users\antoine\desktop\concordia\comp371\assignments\assignment 3\connect4\connect4.cpp(8): error C2143: syntax error: missing ';' before 'return'
+  Generating Code...
